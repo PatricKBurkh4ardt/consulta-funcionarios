@@ -1,0 +1,97 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Mantém a fonte Roboto */
+    margin: 20px;
+    background-color: #f4f4f4;
+    font-size: 1.2em; /* Aumenta o tamanho da fonte em 20% */
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 2.4em; /* Aumenta o tamanho do título */
+}
+
+form {
+    background-color: #fff;
+    padding: 24px; /* Aumenta o padding do formulário */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px; /* Aumenta a margem inferior do formulário */
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 12px; /* Aumenta a margem inferior das labels */
+    font-size: 1.2em; /* Aumenta o tamanho das labels */
+}
+
+select, input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 12px; /* Aumenta o padding dos inputs */
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em; /* Mantém o tamanho da fonte dos inputs */
+}
+
+button {
+    background-color: #2dc787;
+    color: white;
+    border: none;
+    padding: 12px 18px; /* Aumenta o padding do botão */
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1.2em; /* Aumenta o tamanho da fonte do botão */
+}
+
+button:hover {
+    background-color: #28a745;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8em; /* Aumenta o tamanho do subtítulo */
+}
+
+#resultado {
+    background-color: #f8f9fa;
+    padding: 18px; /* Aumenta o padding do resultado */
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    margin-top: 24px; /* Aumenta a margem superior do resultado */
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: monospace;
+    text-align: center; /* Alinha o texto ao centro */
+    white-space: pre-wrap; /* Permite quebras de linha */
+    word-wrap: break-word; /* Quebra palavras longas */
+    font-size: 1.2em; /* Aumenta o tamanho da fonte do resultado */
+}
+
+#resultado {
+    background-color: #f8f9fa;
+    padding: 18px;
+    border-radius: 4px;
+    margin-top: 24px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: monospace;
+    text-align: center; /* Alinha o texto ao centro */
+    white-space: pre-wrap; /* Permite quebras de linha */
+    word-wrap: break-word; /* Quebra palavras longas */
+    font-size: 1.2em; /* Aumenta o tamanho da fonte do resultado */
+}
+
+.erro {
+    background-color: #f8d7da; /* Fundo vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+    color: #721c24; /* Texto vermelho escuro */
+    font-weight: bold; /* Texto em negrito */
+}
