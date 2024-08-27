@@ -1,68 +1,46 @@
-// Dados dos funcionários
-const cadastroFuncionarios = {
-    1533: { Nome: 'Patrick Fabian', Departamento: 'IT', Posição: 'Analista de Sistemas', Empresa: 'Empresa XYZ', 'Número do WhatsApp': '(11) 98765-4321' },
-    2: { Nome: 'Alice Oliveira', Departamento: 'Marketing', Posição: 'Gerente de Marketing', Empresa: 'Empresa ABC', 'Número do WhatsApp': '(21) 91234-5678' },
-    3: { Nome: 'Bob Silva', Departamento: 'Vendas', Posição: 'Vendedor', Empresa: 'Empresa DEF', 'Número do WhatsApp': '(31) 99876-5432' },
-    4: { Nome: 'Diana Santos', Departamento: 'TI', Posição: 'Desenvolvedora', Empresa: 'Empresa GHI', 'Número do WhatsApp': '(41) 98765-1234' }
-};
+const funcionarios = [
+    { id: '12345', nome: 'João Silva', cargo: 'Analista de Sistemas', setor: 'Tecnologia da Informação', empresa: 'Tech Solutions', telefone: '11987654321' },
+    { id: '67890', nome: 'Maria Oliveira', cargo: 'Gerente de Marketing', setor: 'Marketing e Vendas', empresa: 'Agência Digital', telefone: '11987654322' },
+    { id: '11122', nome: 'Pedro Santos', cargo: 'Contador', setor: 'Finanças', empresa: 'Contabilidade & Cia', telefone: '11987654323' },
+    { id: '33344', nome: 'Ana Rodrigues', cargo: 'Assistente Administrativa', setor: 'Administração', empresa: 'Indústria Alimentícia', telefone: '11987654324' },
+    { id: '55566', nome: 'Carlos Ferreira', cargo: 'Engenheiro Civil', setor: 'Engenharia', empresa: 'Construtora', telefone: '11987654325' }
+];
 
-// Normalizar o número do WhatsApp
-function normalizarTelefone(telefone) {
-    return telefone.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-}
+const safeLinks = ["https://www.itau.com.br", "https://www.santander.com.br"]; // Adicione aqui os links seguros
 
-// Consultar funcionário por ID
-function consultarFuncionario(id) {
-    const funcionario = cadastroFuncionarios[id];
-    if (funcionario) {
-        return { ID: id, ...funcionario };
+function consultarFuncionario() {
+    const consultaPor = document.getElementById('consultaPor').value;
+    const consultaInput = document.getElementById('consultaInput').value;
+    const resultadoDiv = document.getElementById('resultadoConsulta');
+
+    let funcionarioEncontrado = null;
+
+    if (consultaPor === 'id') {
+        funcionarioEncontrado = funcionarios.find(f => f.id === consultaInput);
+    } else if (consultaPor === 'telefone') {
+        funcionarioEncontrado = funcionarios.find(f => f.telefone === consultaInput);
+    }
+
+    if (funcionarioEncontrado) {
+        resultadoDiv.innerHTML = `
+            <p>Nome: ${funcionarioEncontrado.nome}</p>
+            <p>Cargo: ${funcionarioEncontrado.cargo}</p>
+            <p>Setor: ${funcionarioEncontrado.setor}</p>
+            <p>Empresa: ${funcionarioEncontrado.empresa}</p>
+        `;
     } else {
-        return `Funcionário com ID ${id} não encontrado. Tenha cuidado porque pode ser uma tentativa de fraude.`;
+        resultadoDiv.innerHTML = "<p>Funcionário não encontrado.</p>";
     }
 }
 
-// Consultar funcionário por número de WhatsApp
-function consultarTelefone(telefone) {
-    const telefoneNormalizado = normalizarTelefone(telefone);
-    for (const id in cadastroFuncionarios) {
-        const dados = cadastroFuncionarios[id];
-        const telefoneCadastradoNormalizado = normalizarTelefone(dados['Número do WhatsApp']);
-        if (telefoneCadastradoNormalizado === telefoneNormalizado) {
-            return { ID: id, ...dados };
-        }
-    }
-    return `O número do WhatsApp ${telefone} não está associado a nenhum funcionário. Tenha cuidado porque pode ser uma tentativa de fraude.`;
-}
+function verificarLink() {
+    const linkInput = document.getElementById('linkInput').value;
+    const resultadoVerificacaoDiv = document.getElementById('resultadoVerificacao');
 
-// Lidar com o envio do formulário
-document.getElementById('consultaForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Impede o envio do formulário
-
-    const tipoConsulta = document.getElementById('tipo').value;
-    let resultado;
-
-    if (tipoConsulta === 'id') {
-        const idDigitado = parseInt(document.getElementById('id').value);
-        resultado = consultarFuncionario(idDigitado);
+    if (safeLinks.includes(linkInput)) {
+        resultadoVerificacaoDiv.innerHTML = `<p>O link é seguro: ${linkInput}</p>`;
     } else {
-        const telefoneDigitado = document.getElementById('whatsapp').value;
-        resultado = consultarTelefone(telefoneDigitado);
-    }
-
-    // Exibir o resultado
-    document.getElementById('resultado').textContent = JSON.stringify(resultado, null, 2);
-});
-
-// Exemplo de como lidar com o resultado da consulta
-function mostrarResultado(consultaValida) {
-    const resultado = document.getElementById('resultado');
-    resultado.className = ""; // Remove qualquer classe anterior
-
-    if (!consultaValida) {
-        resultado.classList.add('erro'); // Adiciona a classe de erro
-        resultado.textContent = "⚠️ ATENÇÃO! O número do WhatsApp não está associado a nenhum funcionário. Isso pode ser uma tentativa de FRAUDE. Proteja seus dados e verifique a autenticidade antes de fornecer informações pessoais.";
-    } else {
-        resultado.className = ""; // Limpa a classe
-        resultado.textContent = "Consulta realizada com sucesso!";
+        resultadoVerificacaoDiv.innerHTML = `<p>Cuidado! O link pode ser malicioso: ${linkInput}</p>`;
     }
 }
+
